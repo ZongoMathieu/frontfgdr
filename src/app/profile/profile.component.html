@@ -1,0 +1,54 @@
+<div class="container" *ngIf="currentUser; else loggedOut">
+  <div class="card card-container">
+    <strong>Roles:</strong>
+  <ul>
+    <li *ngFor="let role of currentUser.roles">
+      {{ role }}
+    </li>
+  </ul>
+    <form name="form" #f="ngForm">
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <input
+          type="text" class="form-control" name="username"
+           value="{{ currentUser.username }}" disabled/>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email" class="form-control" 
+          name="email" value="{{ currentUser.email }}" disabled />
+        
+      </div>
+      <div class="form-group">
+        <label for="password">Ancien mot de passe</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          required
+          minlength="6"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Nouveau mot de passe</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          required
+          minlength="6"
+        />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-info btn-block">Valider</button>
+      </div>
+
+    </form>
+
+    
+  </div>
+</div>
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

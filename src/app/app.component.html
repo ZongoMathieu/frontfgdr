@@ -1,0 +1,41 @@
+<div id="app">
+  <nav class="navbar navbar-expand navbar-dark bg-primary" *ngIf="isLoggedIn" >
+    <a href="#" class="navbar-brand">
+      <img
+      id="profile-img"
+      src="../assets/images/corisbank2.png"
+       />
+    
+    </a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+      </li>
+      <li class="nav-item">
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto dropleft" *ngIf="isLoggedIn">
+      <li class="nav-item dropdown">
+        <a class="btn btn-success dropdown-toggle"  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Bienvenue {{ username| uppercase }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/profile" routerLink="profile">Profile</a>
+          <a class="dropdown-item" *ngIf="showAdminBoard" href="/register" routerLink="register">Nouvelle Utilisateur</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href (click)="logout()">Deconnexion</a>
+        </div>
+      </li>
+    </ul>
+    
+    
+  </nav>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
