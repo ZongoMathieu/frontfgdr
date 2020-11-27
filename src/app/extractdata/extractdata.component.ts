@@ -102,7 +102,29 @@ export class ExtractdataComponent implements OnInit {
 
   }
   public exportexcel(){
-    this.userService.getFileExcel();
+
+    this.userService.getFileExcel().subscribe(data=>{
+      const blob=new Blob([data],
+        {type:'application/application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+      if(window.navigator && window.navigator.msSaveOrOpenBlob){
+        window.navigator.msSaveOrOpenBlob(blob);
+        return ;
+      }
+      const donnees=window.URL.createObjectURL(blob);
+      const link =document.createElement('a');
+      link.href=donnees;
+      link.download="fond.xlsx";
+      link.dispatchEvent(new MouseEvent('click',{bubbles:true, cancelable:true, view: window}))
+      setTimeout(function(){
+        window.URL.revokeObjectURL(donnees);
+        link.remove();
+      }, 100)
+      
+    }, err=>{
+      this.erreur=0;
+      console.log(this.erreur);
+    });
+    //this.userService.getFileExcel();
 
   }
 

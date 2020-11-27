@@ -27,8 +27,8 @@ export class UserService {
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
-  getFileExcel():any {
-    return this.http.get(host + '/fondgarantie.xlsx', { responseType: 'blob' });
+  getFileExcel():Observable<Blob>  {
+    return this.http.get('http://localhost:8787/api/auth' + '/fondgarantie.xlsx', { responseType: 'blob' });
   }
   public getResource(url){
     return this.http.get(host+url);
