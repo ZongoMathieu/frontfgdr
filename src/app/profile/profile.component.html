@@ -6,28 +6,33 @@
       {{ role }}
     </li>
   </ul>
-    <form name="form" #f="ngForm">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" >
       <div class="form-group">
-        <label for="username">Nom d'utilisateur</label>
+        <label for="username">Nom d'utilisateur{{ currentUser.country }}</label>
         <input
-          type="text" class="form-control" name="username"
-           value="{{ currentUser.username }}" disabled/>
+          type="text" class="form-control" name="country"
+          [(ngModel)]="currentUser.username" hidden/>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
         <input
           type="email" class="form-control" 
-          name="email" value="{{ currentUser.email }}" disabled />
+          name="email" [(ngModel)]="currentUser.email" #email=ngModel disabled/>
         
       </div>
+      <input
+          type="text" class="form-control" name="country"
+          [(ngModel)]="currentUser.username" hidden/>
       <div class="form-group">
-        <label for="password">Ancien mot de passe</label>
+        <label for="password1">Ancien mot de passe</label>
         <input
           type="password"
           class="form-control"
-          name="password"
+          name="password1"
           required
           minlength="6"
+          [(ngModel)]="form.password1"
+          #password1=ngModel
         />
       </div>
       <div class="form-group">
@@ -37,11 +42,13 @@
           class="form-control"
           name="password"
           required
+          [(ngModel)]="form.password"
+          #password=ngModel
           minlength="6"
         />
       </div>
       <div class="form-group">
-        <button class="btn btn-info btn-block">Valider</button>
+        <button class="btn btn-info btn-block" type="submit">Valider</button>
       </div>
 
     </form>
@@ -50,5 +57,5 @@
   </div>
 </div>
 <ng-template #loggedOut>
-  Please login.
+ <p style="padding-top: 30px;"> Veuillez vous connecter s'il vous plaît!<a class="btn btn-info" href (click)="logout()">Connexion</a>.</p>
 </ng-template>

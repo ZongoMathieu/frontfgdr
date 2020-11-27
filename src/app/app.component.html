@@ -1,5 +1,5 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-primary" *ngIf="isLoggedIn" >
+  <nav class="navbar navbar-expand navbar-dark" style="background-color: #0d3e8e;" *ngIf="isLoggedIn" >
     <a href="#" class="navbar-brand">
       <img
       id="profile-img"
@@ -7,15 +7,15 @@
        />
     
     </a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="showAdminBoard" routerLinkActive="active">
+        <a href="/admin" class="nav-link" routerLink="admin">SUPER ADMIN</a>
       </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+      <li class="nav-item" *ngIf="showModeratorBoard" routerLinkActive="active">
+        <a href="/register" class="nav-link" routerLink="register">NOUVELLE UTILISATEUR</a>
       </li>
-      <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a href="/extraction" class="nav-link" *ngIf="isLoggedIn" routerLink="extraction">EXTRACTION</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto dropleft" *ngIf="isLoggedIn">
@@ -25,10 +25,11 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/profile" routerLink="profile">Profile</a>
-          <a class="dropdown-item" *ngIf="showAdminBoard" href="/register" routerLink="register">Nouvelle Utilisateur</a>
+          
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href (click)="logout()">Deconnexion</a>
         </div>
+        
       </li>
     </ul>
     
@@ -38,4 +39,10 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+  <footer class="footer" style="text-align: center; position: absolute; padding-top: 20%;
+  width: 100%;bottom:auto;" *ngIf="isLoggedIn">
+ 
+    <span> Tous droits reservés © Copyright 2020-Coris Holding</span>
+ 
+    </footer>
 </div>

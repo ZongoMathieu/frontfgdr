@@ -1,0 +1,77 @@
+<div class="container" *ngIf="isLoggedIn; else loggedOut">
+        <div class="col-md-3 border selection rounded border-primary">
+          <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <div class="form-group">
+            <label for="periode"><strong> PERIODE</strong></label>
+            <select id="periode" class="form-control" name="etat" required ngModel>
+              <option value="">Selectionner la période</option>
+              <option value="1">Ier Trimestre</option>
+              <option value="2">IIe Trimestre</option>
+              <option value="3">IIIe Trimestre</option>
+              <option value="4">IVe Trimestre</option>
+              <option value="5">ANNUEL</option>
+            </select>
+      </div>
+          <div class="form-group">
+            <label for="annee"><strong>ANNEE</strong></label>
+            <select id="anne" class="form-control" name="annee" required ngModel>
+              <option value="">Selection l'année</option>
+              <option  value="2019">2019</option>
+              <option  value="2018">2018</option>
+             
+            </select>
+      </div>
+      
+      <button type="submit" [disabled]="!f.valid"  class="btn btn-success">VALIDER</button>
+    </form> 
+        </div>
+        <div *ngIf="wait==1">
+          <img src="../../assets/images/giphy.gif" style="width: 50px; height: 50px;"/>
+         <span style="color: red;">Chargement des données en cours, veuillez patienter...!</span>
+        </div>
+        
+        <h1  *ngIf="erreur==0" style="color: red;"> Erreur de Chargement de données</h1>
+        <div class="col-md-12" *ngIf="dataGarantie">
+            <div class="btn-group extractBtn">
+             
+              <button (click)="exportexcel()" class="btn btn-info" [disabled]="btnExcel==0"> TELECHARGER XLSX</button>
+              
+              <button (click)="convetToPDF()" class="btn btn-primary" [disabled]="btnExcel==0"> TELECHARGER PDF</button>
+          
+            </div>
+            <div class="panel panel-info" hidden>
+              <!-- Default panel contents -->
+              <div class="panel-heading">LISTE DES ENTREES - SORTIES</div>
+              <div class="panel-body">
+            <table class="table table-hover" id="excel-table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>NOM</th>
+                  <th>PRENOM</th>
+                  <th>FILIALE</th>
+                  <th>DATE D'EXPIRATION</th>
+                  
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let v of users">
+                  <td>{{v.id}}</td>
+                  <td>{{v.username}}</td>
+                  <td>{{v.username}}</td>
+                  <td>{{v.username}}</td>
+                  <td>
+                   <span *ngFor="let r of v.roles"> <p>{{r.name}}</p></span> 
+                  </td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>  
+          </div>
+</div>
+<ng-template #loggedOut>
+  <p style="padding-top: 30px;"> Veuillez vous connecter s'il vous plaît!<a class="btn btn-info" href (click)="logout()">Connexion</a>.</p>
+ </ng-template>

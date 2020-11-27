@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'http://localhost:8787/api/chd/';
+const host="http://localhost:8787/api/chd";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,11 @@ export class UserService {
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
+  getFileExcel():any {
+    return this.http.get(host + '/fondgarantie.xlsx', { responseType: 'blob' });
+  }
+  public getResource(url){
+    return this.http.get(host+url);
+      }
 
 }

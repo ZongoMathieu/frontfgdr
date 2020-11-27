@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
+  country: string;
 
   constructor(private tokenStorageService: TokenStorageService) {
 
@@ -29,6 +30,8 @@ export class AppComponent implements OnInit{
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
+      this.country=user.country;
+      console.log(this.country);
     }
     
   }
